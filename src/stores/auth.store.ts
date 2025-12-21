@@ -18,12 +18,13 @@ export const useAuthStore = defineStore('auth', () => {
   async function login(email: string, password: string) {
     loading.value = true
     error.value = null
+
     try {
-      const response = await authService.login(email, password)
+      await authService.login(email, password)
 
-      user.value = response.user
+      const meResponse = await authService.me()
 
-      console.log('User atualizado na store:', user.value)
+      user.value = meResponse.user
     } catch (err: any) {
       error.value = err.response?.data?.message || 'Erro ao logar'
       user.value = null
