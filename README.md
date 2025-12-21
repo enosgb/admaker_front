@@ -1,6 +1,27 @@
 # AdMaker Frontend
 
-App for create ads with AI
+App for create ads 
+
+- [ ] Home
+- [ ] Navbar
+- [ ] Authentication 
+  - [ ] Login
+  - [ ] Logout  
+  - [ ] Reset password
+  - [ ] Change password
+- [ ] Users management  
+- [ ] Ads Categories management
+- [ ] Ads Products management
+- [ ] Ads Store management  
+- [ ] Ads management  
+- [ ] Public Ads
+- [ ] Features
+  - [ ] Filters and Sorting
+  - [ ] Favorites
+  - [ ] Loading
+- [ ] Optimization
+  - [ ] Pagination
+- [ ] Tests
 
 ## Technologies
 

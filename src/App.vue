@@ -1,11 +1,23 @@
-<script setup lang="ts"></script>
-
 <template>
-  <h1 class="bg-black text-white">You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div id="app">
+    <Navbar v-if="showNav" />
+    <router-view />
+  </div>
 </template>
 
-<style scoped></style>
+<script setup lang="ts">
+import { computed } from 'vue';
+import Navbar from './components/layouts/NavBar.vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+
+const noNavRoutes = ["auth-page"];
+
+const showNav = computed(() => {
+  return !noNavRoutes.includes(route.name as string);
+});
+
+</script>
+
+<style></style>
