@@ -5,8 +5,8 @@ App for create ads
 - [ ] Home
 - [ ] Navbar
 - [ ] Authentication 
-  - [ ] Login
-  - [ ] Logout  
+  - [x] Login
+  - [x] Logout  
   - [ ] Reset password
   - [ ] Change password
 - [ ] Users management  
