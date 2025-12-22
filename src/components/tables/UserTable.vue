@@ -26,9 +26,12 @@
             {{ user.is_active ? 'Ativo' : 'Inativo' }}
           </span>
         </td>
-        <td class="py-2 px-4 text-right ">
+        <td class="py-2 px-4 text-right flex gap-2">
           <button @click="$emit('open-menu', user)" class="cursor-pointer text-gray-400 hover:text-gray-600">
             <PencilIcon class="h-5 w-5" />
+          </button>
+          <button @click="$emit('delete-user', user)" class="cursor-pointer text-gray-400 hover:text-gray-600">
+            <TrashIcon class="h-5 w-5" />
           </button>
         </td>
       </tr>
@@ -38,10 +41,11 @@
 
 <script setup lang="ts">
 import type { User } from '@/types/user.types'
-import { PencilIcon } from '@heroicons/vue/24/solid';
+import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid';
 
 defineProps<{ users: User[] }>()
 defineEmits<{
   (e: 'open-menu', user: User): void
+  (e: 'delete-user', user: User): void
 }>()
 </script>

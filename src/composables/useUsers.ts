@@ -14,6 +14,10 @@ export function useUsers() {
     await store.updateUser(payload, id)
     await fetchUsers()
   }
+  const deleteUser = async (id: number) => {
+    await store.deleteUser(id)
+    await fetchUsers()
+  }
   const clearError = () => store.clearError()
   const clearSuccess = () => store.clearSuccess()
 
@@ -25,6 +29,7 @@ export function useUsers() {
     fetchUsers,
     createUser,
     updateUser,
+    deleteUser,
     error,
     success,
     loading,

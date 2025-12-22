@@ -56,6 +56,22 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
+  async function deleteUser(id: number) {
+    loading.value = true
+    try {
+      await userService.deleteUser(id)
+      users.value = users.value.filter((user) => user.id !== id)
+      total.value -= 1
+      totalPages.value = Math.ceil(total.value / pageSize)
+      success.value = 'Usuário deletado com sucesso!'
+    } catch (err: unknown) {
+      const axiosError = err as AxiosErrorResponse
+      error.value = getMsgErrDRF(axiosError?.response?.data) || 'Erro ao deletar usuário'
+    } finally {
+      loading.value = false
+    }
+  }
+
   const clearError = () => {
     error.value = null
   }
@@ -74,6 +90,7 @@ export const useUserStore = defineStore('userStore', () => {
     fetchUsers,
     createUser,
     updateUser,
+    deleteUser,
     error,
     success,
     loading,
