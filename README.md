@@ -9,7 +9,7 @@ App for create ads
   - [x] Logout  
   - [ ] Reset password
   - [ ] Change password
-- [ ] Users management  
+- [x] Users management  
 - [ ] Ads Categories management
 - [ ] Ads Products management
 - [ ] Ads Store management  

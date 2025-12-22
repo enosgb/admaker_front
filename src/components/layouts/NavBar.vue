@@ -43,7 +43,7 @@ import logoUrl from '@/assets/logos/logo_admaker.png'
 import { useAuth } from '@/composables/useAuth'
 import { useRouter } from 'vue-router'
 import { MENU_OPTIONS } from '@/constants/MENU_OPTIONS'
-import type { MenuOption } from '@/types/menu_option.types'
+import type { MenuOption } from '@/types/menu.option.types'
 
 const { logout, user, role } = useAuth()
 const avatar = user.value?.image
