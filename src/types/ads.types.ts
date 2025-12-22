@@ -7,3 +7,10 @@ export interface AdCategory {
   created_at: string
   updated_at: string
 }
+
+export interface AdCategoryPayload {
+  name: string
+  description: string
+  image?: File | null
+  active?: boolean
+}

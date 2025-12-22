@@ -8,7 +8,7 @@
           <h1 class="text-center text-4xl font-bold mb-8 text-black">Categorias</h1>
         </div>
         <div class="sm:col-start-3 text-center">
-          <ButtonDefault label="Adicionar Categoria" type="button" class="w-52 mx-auto" />
+          <ButtonDefault @click="handleCreateCategory" label="Adicionar Categoria" type="button" class="w-52 mx-auto" />
         </div>
       </div>
       <div class="flex flex-col items-center justify-center gap-4">
@@ -25,7 +25,9 @@ import ButtonDefault from '@/components/buttons/buttonDefault.vue';
 import CardObject from '@/components/cards/CardObject.vue';
 import { useAdsCategories } from '@/composables/useAdsCategories';
 import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const { error, success, loading, categories, fetchCategories } = useAdsCategories()
 
 function handleDelete(id: number) {
@@ -34,6 +36,10 @@ function handleDelete(id: number) {
 
 function handleEdit(id: number) {
   console.log(id)
+}
+
+function handleCreateCategory() {
+  router.push({ name: 'ads-create-category-page' })
 }
 
 onMounted(() => fetchCategories())
