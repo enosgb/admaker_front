@@ -2,26 +2,25 @@
 
 App for create ads 
 
-- [ ] Home
-- [ ] Navbar
-- [ ] Authentication 
+- [x] Home
+- [x] Navbar
+- [x] Authentication 
   - [x] Login
   - [x] Logout  
   - [ ] Reset password
   - [ ] Change password
 - [x] Users management  
-- [ ] Ads Categories management
-- [ ] Ads Products management
+- [x] Ads Categories management
+- [x] Ads Products management
 - [ ] Ads Store management  
 - [ ] Ads management  
 - [ ] Public Ads
 - [ ] Features
   - [ ] Filters and Sorting
   - [ ] Favorites
-  - [ ] Loading
+  - [x] Loading
 - [ ] Optimization
-  - [ ] Pagination
-- [ ] Tests
+  - [x] Pagination
 
 ## Technologies
 
