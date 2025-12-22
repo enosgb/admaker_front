@@ -3,5 +3,7 @@ export interface User {
   name: string
   email: string
   is_staff?: boolean
+  is_active?: boolean
   image: string | null
+  created_at: string
 }

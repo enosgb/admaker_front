@@ -6,6 +6,7 @@ import HomeUser from '@/pages/HomeUser.vue'
 import { setupAuthGuard } from './guards/auth.guard'
 import ProfilePage from '@/pages/profile/ProfilePage.vue'
 import { ROLES } from '@/constants/ROLES'
+import UsersPage from '@/pages/management/UsersPage.vue'
 
 const routes = [
   {
@@ -25,6 +26,12 @@ const routes = [
     name: 'profile-page',
     component: ProfilePage,
     meta: { requiresAuth: true, allowedRoles: [ROLES.USER, ROLES.ADMIN] },
+  },
+  {
+    path: '/users',
+    name: 'users-page',
+    component: UsersPage,
+    meta: { requiresAuth: true, allowedRoles: [ROLES.ADMIN] },
   },
   {
     path: '/login',

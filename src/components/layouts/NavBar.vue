@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-white p-4 text-black shadow-lg">
+  <nav class="bg-white p-4 text-black shadow-lg w-full">
     <div class="container mx-auto flex justify-between items-center">
       <div @click="handleHome" class="flex items-center gap-3 cursor-pointer">
         <img :src="logoUrl" alt="Logo" class="w-12" />
