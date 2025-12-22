@@ -9,8 +9,14 @@ export const userService = {
     return await api.patch(`users/${id}/`, form)
   },
 
-  async fetchUsers(page = 1): Promise<ApiResponse<User>> {
-    const response = api.get(`users/?page=${page}&page_size=3`)
+  async fetchUsers(page = 1, page_size = 10): Promise<ApiResponse<User>> {
+    const response = api.get(`users/?page=${page}&page_size=${page_size}`)
     return response.then((res) => res.data)
+  },
+  async createUser(payload: FormData): Promise<User> {
+    const { data } = await api.post<User>('users/', payload, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return data
   },
 }

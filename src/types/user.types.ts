@@ -7,3 +7,12 @@ export interface User {
   image: string | null
   created_at: string
 }
+
+export interface UserPayload {
+  name: string
+  email: string
+  password: string
+  image?: File | null
+  is_staff?: boolean
+  is_active?: boolean
+}
