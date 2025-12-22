@@ -11,8 +11,8 @@ export interface User {
 export interface UserPayload {
   name: string
   email: string
-  password: string
-  image?: File | null
+  password?: string
+  image?: File | null | string
   is_staff?: boolean
   is_active?: boolean
 }

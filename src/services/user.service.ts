@@ -19,4 +19,11 @@ export const userService = {
     })
     return data
   },
+
+  async updateUser(payload: FormData, id: number): Promise<User> {
+    const { data } = await api.patch<User>(`users/${id}/`, payload, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return data
+  },
 }

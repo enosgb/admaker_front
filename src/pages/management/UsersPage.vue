@@ -12,7 +12,7 @@
       <div class="p-6 bg-white rounded-lg shadow overflow-auto">
         <UserTable :users="users" @open-menu="openMenu" />
         <Pagination :currentPage="currentPage" :totalPages="totalPages" @change-page="fetchUsers" />
-        <ModalUser :isOpen="isModalOpen" @close="isModalOpen = false" />
+        <ModalUser :isOpen="isModalOpen" @close="closeMenu" :user="selectedUser" />
       </div>
     </div>
   </div>
@@ -30,9 +30,16 @@ import { onMounted, ref } from 'vue'
 const { users, currentPage, totalPages, fetchUsers } = useUsers()
 
 const isModalOpen = ref(false);
+const selectedUser = ref<User | null>(null);
 
 function openMenu(user: User) {
-  console.log('Menu do usuário', user)
+  selectedUser.value = user ?? null
+  isModalOpen.value = true
+}
+
+function closeMenu() {
+  isModalOpen.value = false
+  selectedUser.value = null
 }
 
 onMounted(() => fetchUsers())

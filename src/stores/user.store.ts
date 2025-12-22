@@ -43,6 +43,19 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
+  async function updateUser(payload: FormData, id: number) {
+    loading.value = true
+    try {
+      await userService.updateUser(payload, id)
+      success.value = 'Usuário atualizado com sucesso!'
+    } catch (err: unknown) {
+      const axiosError = err as AxiosErrorResponse
+      error.value = getMsgErrDRF(axiosError?.response?.data) || 'Erro ao atualizar usuário'
+    } finally {
+      loading.value = false
+    }
+  }
+
   const clearError = () => {
     error.value = null
   }
@@ -60,6 +73,7 @@ export const useUserStore = defineStore('userStore', () => {
     totalPages,
     fetchUsers,
     createUser,
+    updateUser,
     error,
     success,
     loading,

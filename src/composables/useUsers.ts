@@ -10,6 +10,10 @@ export function useUsers() {
 
   const fetchUsers = (page = 1) => store.fetchUsers(page)
   const createUser = (payload: FormData) => store.createUser(payload)
+  const updateUser = async (payload: FormData, id: number) => {
+    await store.updateUser(payload, id)
+    await fetchUsers()
+  }
   const clearError = () => store.clearError()
   const clearSuccess = () => store.clearSuccess()
 
@@ -20,6 +24,7 @@ export function useUsers() {
     totalPages: computed(() => store.totalPages),
     fetchUsers,
     createUser,
+    updateUser,
     error,
     success,
     loading,
