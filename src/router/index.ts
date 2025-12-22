@@ -8,7 +8,7 @@ import ProfilePage from '@/pages/profile/ProfilePage.vue'
 import { ROLES } from '@/constants/ROLES'
 import UsersPage from '@/pages/management/users/UsersPage.vue'
 import AdsCategoriesPage from '@/pages/management/ads/categories/AdsCategoriesPage.vue'
-import AdsCreateCategoryPage from '@/pages/management/ads/categories/AdsCreateCategoryPage.vue'
+import AdsCategoryPage from '@/pages/management/ads/categories/AdsCategoryPage.vue'
 
 const routes = [
   {
@@ -44,7 +44,13 @@ const routes = [
   {
     path: '/ads/category',
     name: 'ads-create-category-page',
-    component: AdsCreateCategoryPage,
+    component: AdsCategoryPage,
+    meta: { requiresAuth: true, allowedRoles: [ROLES.ADMIN] },
+  },
+  {
+    path: '/ads/category/:id',
+    name: 'ads-edit-category-page',
+    component: AdsCategoryPage,
     meta: { requiresAuth: true, allowedRoles: [ROLES.ADMIN] },
   },
   {

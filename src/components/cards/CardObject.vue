@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-white w-full h-30 sm:h-50 shadow-lg p-4 rounded-2xl">
+  <div class="bg-white w-full sm:w-175 h-30 sm:h-50 shadow-lg p-4 rounded-2xl">
     <div class="grid grid-cols-2">
-      <img v-if="image" :src="image" alt="Logo" class="h-22 sm:h-42 object-cover rounded-2xl" />
+      <img v-if="image" :src="image" alt="Logo" class="h-22 sm:h-42 object-cover rounded-2xl mx-auto ml-0" />
       <PhotoIcon v-else class="h-22 sm:h-42 text-[#71c6e5]" />
       <div class="relative">
         <div class="max-h-22 sm:max-h-42 overflow-y-auto">

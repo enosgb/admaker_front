@@ -2,7 +2,9 @@
 
   <form @submit="handleCreateCategory" class="relative">
     <div class="container mx-auto">
-      <h1 class="my-6 text-center text-4xl  mb-8 text-black font-bold">Criar Categoria:</h1>
+      <h1 class="my-6 text-center text-4xl font-bold">
+        {{ categoryId ? 'Editar Categoria' : 'Criar Categoria' }}
+      </h1>
     </div>
     <div class="flex flex-col items-center justify-center gap-4">
       <div class="bg-white p-6 shadow-lg rounded-2xl">
@@ -19,7 +21,8 @@
             label="Descrição:" input="description" />
           <InputCheckbox input-name="active" class="text-gray-400 col-span-2" label="Ativo:" input="active"
             v-model="form.active" />
-          <ButtonDefault v-if="!loading" label="Criar" type="submit" class="w-full mx-auto col-span-2" />
+          <ButtonDefault v-if="!loading" :label="categoryId ? 'Atualizar' : 'Criar'" type="submit"
+            class="w-full mx-auto col-span-2" />
           <LogoLoading class="col-span-2" :loading="loading" />
 
         </div>
@@ -39,9 +42,12 @@ import LogoLoading from '@/components/loading/LogoLoading.vue';
 
 import { useAdsCategories } from '@/composables/useAdsCategories';
 import type { AdCategoryPayload } from '@/types/ads.types';
-import { reactive, watch } from 'vue';
+import { onMounted, reactive, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
-const { error, success, loading, createCategory, clearError, clearSuccess } = useAdsCategories()
+const route = useRoute()
+const categoryId = route.params.id as string | undefined
+const { error, success, loading, createCategory, clearError, clearSuccess, fetchCategory, updateCategory } = useAdsCategories()
 
 const form = reactive<AdCategoryPayload>({
   name: '',
@@ -66,7 +72,11 @@ function handleCreateCategory(e: Event) {
   formData.append('description', form.description);
   formData.append('active', String(form.active));
   if (form.image && form.image instanceof File) formData.append('image', form.image);
-  createCategory(formData)
+  if (categoryId) {
+    updateCategory(formData, Number(categoryId))
+  } else {
+    createCategory(formData)
+  }
 }
 
 watch([error, success], ([newError, newSuccess]) => {
@@ -76,10 +86,28 @@ watch([error, success], ([newError, newSuccess]) => {
     setTimeout(() => {
       clearForm()
       clearSuccess()
+      if (categoryId) {
+        handleFetchCategory()
+      }
       close()
     }, 5000)
   }
 })
 
+async function handleFetchCategory() {
+  if (categoryId) {
+    const category = await fetchCategory(Number(categoryId))
+    Object.assign(form, {
+      name: category.name,
+      description: category.description,
+      active: category.active,
+      image: category.image
+    })
+  }
+}
+
+onMounted(async () => {
+  handleFetchCategory()
+})
 
 </script>

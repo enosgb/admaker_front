@@ -38,8 +38,10 @@ const preview = ref<string | null>(null);
 watch(
   () => props.modelValue,
   (newVal) => {
-    if (newVal) {
+    if (newVal instanceof File) {
       preview.value = URL.createObjectURL(newVal);
+    } else if (typeof newVal === 'string') {
+      preview.value = newVal;
     } else {
       preview.value = null;
     }

@@ -7,7 +7,7 @@ export const adsCategoriesService = {
   },
 
   fetchCategory: async (id: number) => {
-    const response = await api.get(`ads/categories/${id}/`)
+    const response = await api.get(`ads/categories/${id}`)
     return response.data
   },
 
@@ -19,14 +19,14 @@ export const adsCategoriesService = {
   },
 
   updateCategory: async (payload: FormData, id: number) => {
-    const { data } = await api.patch(`ads/categories/${id}/`, payload, {
+    const { data } = await api.patch(`ads/categories/${id}`, payload, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
     return data
   },
 
   deleteCategory: async (id: number) => {
-    const { data } = await api.delete(`ads/categories/${id}/`)
+    const { data } = await api.delete(`ads/categories/${id}`)
     return data
   },
 }
