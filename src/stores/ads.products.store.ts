@@ -17,16 +17,28 @@ export const useAuthProductsStore = defineStore('adsProducts', () => {
   const error = ref<string | null>(null)
   const success = ref<string | null>(null)
 
+
   async function fetchProducts(page = 1, page_size = 10) {
     loading.value = true
-    const data = await adsProductsService.fetchProducts(page, page_size)
-    products.value = data.results
-    total.value = data.count
-    next.value = data.next
-    previous.value = data.previous
-    currentPage.value = data.current_page
-    totalPages.value = Math.ceil(data.count / pageSize)
-    loading.value = false
+    try {
+      const data = await adsProductsService.fetchProducts(page, page_size)
+
+      if (page === 1) {
+        products.value = data.results
+      } else {
+        products.value = [...products.value, ...data.results]
+      }
+
+      total.value = data.count
+      next.value = data.next
+      previous.value = data.previous
+      currentPage.value = data.current_page || page
+      totalPages.value = Math.ceil(data.count / pageSize)
+    } catch (err) {
+      console.error(err)
+    } finally {
+      loading.value = false
+    }
   }
 
   async function fetchProduct(id: number) {
@@ -81,6 +93,55 @@ export const useAuthProductsStore = defineStore('adsProducts', () => {
     }
   }
 
+  async function fetchPublicProducts(page = 1, page_size = 10) {
+    loading.value = true
+    try {
+      const data = await adsProductsService.fetchPublicProducts(page, page_size)
+
+      if (page === 1) {
+        products.value = data.results
+      } else {
+        products.value = [...products.value, ...data.results]
+      }
+
+      total.value = data.count
+      next.value = data.next
+      previous.value = data.previous
+      currentPage.value = data.current_page || page
+      totalPages.value = Math.ceil(data.count / pageSize)
+    } catch (err) {
+      console.error(err)
+    } finally {
+      loading.value = false
+    }
+  }
+
+  async function addFavorite(productId: number) {
+    loading.value = true
+    try {
+      await adsProductsService.addFavorite(productId)
+      success.value = 'Produto favoritado com sucesso!'
+    } catch (err) {
+      const axiosError = err as AxiosErrorResponse
+      error.value = getMsgErrDRF(axiosError?.response?.data)
+    } finally {
+      loading.value = false
+    }
+  }
+
+  async function listFavorites(page = 1, page_size = 10) {
+    loading.value = true
+    try {
+      const data = await adsProductsService.listFavorites(page, page_size)
+      return data
+    } catch (err) {
+      const axiosError = err as AxiosErrorResponse
+      error.value = getMsgErrDRF(axiosError?.response?.data)
+    } finally {
+      loading.value = false
+    }
+  }
+
   function clearError() {
     error.value = null
   }
@@ -107,5 +168,8 @@ export const useAuthProductsStore = defineStore('adsProducts', () => {
     deleteProduct,
     clearError,
     clearSuccess,
+    fetchPublicProducts,
+    addFavorite,
+    listFavorites,
   }
 })

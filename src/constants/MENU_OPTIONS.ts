@@ -4,10 +4,10 @@ export const MENU_OPTIONS = {
       name: 'users-page',
       label: 'Gerenciar usuários',
     },
-    {
+    /* {
       name: 'ads-store-page',
       label: 'Gerenciar lojas',
-    },
+    }, */
     {
       name: 'ads-categories-page',
       label: 'Gerenciar categorias',
@@ -16,10 +16,10 @@ export const MENU_OPTIONS = {
       name: 'ads-products-page',
       label: 'Gerenciar produtos',
     },
-    {
+    /* {
       name: 'ads-page',
       label: 'Gerenciar anúncios',
-    },
+    }, */
   ],
   USER: [
     {

@@ -25,4 +25,20 @@ export const adsProductsService = {
     const { data } = await api.delete(`ads/products/${id}/`)
     return data
   },
+
+  fetchPublicProducts: async (page = 1, page_size = 10) => {
+    const response = await api.get(`ads/products/public/?page=${page}&page_size=${page_size}`)
+    return response.data
+  },
+
+  addFavorite: async (id: number) => {
+    const { data } = await api.post(`ads/favorites/`, {
+      product: id,
+    })
+    return data
+  },
+  listFavorites: async (page = 1, page_size = 10) => {
+    const response = await api.get(`ads/favorites/?page=${page}&page_size=${page_size}`)
+    return response.data
+  },
 }

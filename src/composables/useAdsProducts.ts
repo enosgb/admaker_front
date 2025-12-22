@@ -22,6 +22,14 @@ export const useAdsProducts = () => {
   const clearError = () => store.clearError()
   const clearSuccess = () => store.clearSuccess()
 
+  const fetchPublicProducts = async () => {
+    const data = await store.fetchPublicProducts()
+    return data
+  }
+  const addFavorite = async (id: number) => {
+    await store.addFavorite(id)
+  }
+
   return {
     error,
     success,
@@ -40,5 +48,7 @@ export const useAdsProducts = () => {
     deleteProduct,
     clearError,
     clearSuccess,
+    fetchPublicProducts,
+    addFavorite,
   }
 }
