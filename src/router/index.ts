@@ -6,7 +6,8 @@ import HomeUser from '@/pages/HomeUser.vue'
 import { setupAuthGuard } from './guards/auth.guard'
 import ProfilePage from '@/pages/profile/ProfilePage.vue'
 import { ROLES } from '@/constants/ROLES'
-import UsersPage from '@/pages/management/UsersPage.vue'
+import UsersPage from '@/pages/management/users/UsersPage.vue'
+import AdsCategoriesManagementPage from '@/pages/management/ads/AdsCategoriesManagementPage.vue'
 
 const routes = [
   {
@@ -31,6 +32,12 @@ const routes = [
     path: '/users',
     name: 'users-page',
     component: UsersPage,
+    meta: { requiresAuth: true, allowedRoles: [ROLES.ADMIN] },
+  },
+  {
+    path: '/ads/categories',
+    name: 'ads-categories-page',
+    component: AdsCategoriesManagementPage,
     meta: { requiresAuth: true, allowedRoles: [ROLES.ADMIN] },
   },
   {
