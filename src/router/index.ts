@@ -9,6 +9,8 @@ import { ROLES } from '@/constants/ROLES'
 import UsersPage from '@/pages/management/users/UsersPage.vue'
 import AdsCategoriesPage from '@/pages/management/ads/categories/AdsCategoriesPage.vue'
 import AdsCategoryPage from '@/pages/management/ads/categories/AdsCategoryPage.vue'
+import AdsProductPage from '@/pages/management/products/AdsProductPage.vue'
+import AdsProductsPage from '@/pages/management/products/AdsProductsPage.vue'
 
 const routes = [
   {
@@ -51,6 +53,24 @@ const routes = [
     path: '/ads/category/:id',
     name: 'ads-edit-category-page',
     component: AdsCategoryPage,
+    meta: { requiresAuth: true, allowedRoles: [ROLES.ADMIN] },
+  },
+  {
+    path: '/ads/products',
+    name: 'ads-products-page',
+    component: AdsProductsPage,
+    meta: { requiresAuth: true, allowedRoles: [ROLES.ADMIN] },
+  },
+  {
+    path: '/ads/product',
+    name: 'ads-create-product-page',
+    component: AdsProductPage,
+    meta: { requiresAuth: true, allowedRoles: [ROLES.ADMIN] },
+  },
+  {
+    path: '/ads/product/:id',
+    name: 'ads-edit-product-page',
+    component: AdsProductPage,
     meta: { requiresAuth: true, allowedRoles: [ROLES.ADMIN] },
   },
   {
