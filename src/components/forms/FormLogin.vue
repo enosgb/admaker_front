@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <MiniAlert :eventName="error" bg-color="bg-red-500" />
+    <!-- <MiniAlert :eventName="error" bg-color="bg-red-500" /> -->
     <form @submit.prevent="handleLogin" class="w-full p-6 m-2 bg-white shadow-lg rounded-2xl">
 
       <div class="flex gap-2 items-center justify-center">
