@@ -1,6 +1,6 @@
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.store'
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 
 export function useAuth() {
   const store = useAuthStore()
@@ -9,33 +9,38 @@ export function useAuth() {
   const user = computed(() => store.user)
   const loading = computed(() => store.loading)
   const error = computed(() => store.error)
+  const success = computed(() => store.success)
 
   const login = async (email: string, password: string) => {
     await store.login(email, password)
+    if (store.user?.is_staff) {
+      await router.replace({ name: 'home-admin' })
+    } else {
+      await router.replace({ name: 'home-user' })
+    }
   }
 
   const logout = async () => {
     await store.logout()
-    router.push({ name: 'auth-page' })
+    if (!store.user) {
+      await router.replace({ name: 'auth-page' })
+    }
+  }
+
+  const changePassword = async (
+    old_password: string,
+    new_password: string,
+    confirm_new_password: string,
+  ) => {
+    await store.changePassword(old_password, new_password, confirm_new_password)
   }
 
   const clearError = () => {
     store.clearError()
   }
-
-  watch(
-    user,
-    (newUser) => {
-      if (newUser) {
-        if (newUser.is_staff) {
-          router.push({ name: 'home-admin' })
-        } else {
-          router.push({ name: 'home-user' })
-        }
-      }
-    },
-    { immediate: true },
-  )
+  const clearSuccess = () => {
+    store.clearSuccess()
+  }
 
   return {
     user,
@@ -44,5 +49,8 @@ export function useAuth() {
     login,
     logout,
     clearError,
+    changePassword,
+    success,
+    clearSuccess,
   }
 }

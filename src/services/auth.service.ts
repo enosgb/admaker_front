@@ -1,4 +1,3 @@
-import getCookie from '@/utils/helpers/getCookie'
 import { api } from './api.service'
 
 export const authService = {
@@ -8,12 +7,24 @@ export const authService = {
   },
 
   logout: async () => {
-    const csrfToken = getCookie('csrftoken')
-    await api.post(`auth/logout/`, {}, { headers: { 'X-CSRFToken': csrfToken } })
+    await api.post(`auth/logout/`, {})
   },
 
   me: async () => {
     const response = await api.get(`auth/current_user/`)
+    return response.data
+  },
+
+  changePassword: async (
+    old_password: string,
+    new_password: string,
+    confirm_new_password: string,
+  ) => {
+    const response = await api.put(`auth/change_password/`, {
+      old_password,
+      new_password,
+      confirm_new_password,
+    })
     return response.data
   },
 }

@@ -1,11 +1,6 @@
 <template>
   <div class="relative">
-    <transition name="fade">
-      <div v-if="error"
-        class="absolute top-2 left-1/2 -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded shadow-md z-10">
-        {{ error }}
-      </div>
-    </transition>
+    <MiniAlert :eventName="error" bg-color="bg-red-500" />
     <form @submit.prevent="handleLogin" class="w-full p-6 m-2 bg-white shadow-lg rounded-2xl">
 
       <div class="flex gap-2 items-center justify-center">
@@ -17,9 +12,7 @@
       <InputPassword input-name="password" class="text-gray-400" label="Senha:" input="password" v-model="password" />
 
       <ButtonDefault v-if="!loading" label=" Entrar" type="submit" class="w-full mx-auto" />
-      <div v-if="loading" class="flex justify-center m-2">
-        <img class="w-10 animate-spin" src="@/assets/logos/logo_admaker.png" alt="Logo Ad Maker">
-      </div>
+      <LogoLoading :loading="loading" />
 
       <span @click="changeTab('forgotPassword')" class="text-[#71c6e5] underline cursor-pointer">
         Esqueci minha senha
@@ -36,6 +29,8 @@ import ButtonDefault from '../buttons/buttonDefault.vue'
 import logo from "@/assets/logos/logo_admaker.png"
 import InputPassword from '../inputs/inputPassword.vue'
 import { useAuth } from '@/composables/useAuth'
+import LogoLoading from '../loading/LogoLoading.vue'
+import MiniAlert from '../alerts/MiniAlert.vue'
 
 const email = ref('')
 const password = ref('')

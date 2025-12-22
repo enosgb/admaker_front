@@ -4,19 +4,27 @@ import HomeAdmin from '@/pages/HomeAdmin.vue'
 import HomeUser from '@/pages/HomeUser.vue'
 
 import { setupAuthGuard } from './guards/auth.guard'
+import ProfilePage from '@/pages/profile/ProfilePage.vue'
+import { ROLES } from '@/constants/roles'
 
 const routes = [
   {
     path: '/admin',
     name: 'home-admin',
     component: HomeAdmin,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, allowedRoles: [ROLES.ADMIN] },
   },
   {
     path: '/',
     name: 'home-user',
     component: HomeUser,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, allowedRoles: [ROLES.USER] },
+  },
+  {
+    path: '/profile',
+    name: 'profile-page',
+    component: ProfilePage,
+    meta: { requiresAuth: true, allowedRoles: [ROLES.USER, ROLES.ADMIN] },
   },
   {
     path: '/login',
