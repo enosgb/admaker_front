@@ -2,14 +2,10 @@
   <div class="container mx-auto p-6 md:w-1/2 w-full">
     <div class="flex items-center justify-center">
       <div class="relative cursor-pointer" @click="triggerFile">
-        <!-- Ícone padrão -->
         <UserCircleIcon v-if="!userImage" class="h-30 w-30 text-gray-600 hover:text-gray-900 transition-colors" />
-
-        <!-- Imagem do usuário -->
         <img v-else :src="userImage" alt="User"
           class="h-30 w-30 rounded-full object-cover hover:opacity-80 transition" />
 
-        <!-- input escondido -->
         <input ref="fileInput" type="file" accept="image/*" class="hidden" @change="handleFileChange" />
       </div>
     </div>

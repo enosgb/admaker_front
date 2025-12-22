@@ -1,6 +1,6 @@
 import type { Router } from 'vue-router'
 import { useAuthStore } from '@/stores/auth.store'
-import { ROLES } from '@/constants/roles'
+import { ROLES } from '@/constants/ROLES'
 
 export function setupAuthGuard(router: Router) {
   router.beforeEach((to, from, next) => {
@@ -19,9 +19,6 @@ export function setupAuthGuard(router: Router) {
     const userRole = authStore.user.is_staff ? ROLES.ADMIN : ROLES.USER
 
     const allowedRoles = to.meta.allowedRoles as string[] | undefined
-    console.log('to:', to.name)
-    console.log('allowedRoles:', allowedRoles)
-    console.log('userRole:', userRole)
 
     if (allowedRoles && !allowedRoles.includes(userRole)) {
       next({

@@ -5,7 +5,7 @@ import HomeUser from '@/pages/HomeUser.vue'
 
 import { setupAuthGuard } from './guards/auth.guard'
 import ProfilePage from '@/pages/profile/ProfilePage.vue'
-import { ROLES } from '@/constants/roles'
+import { ROLES } from '@/constants/ROLES'
 
 const routes = [
   {

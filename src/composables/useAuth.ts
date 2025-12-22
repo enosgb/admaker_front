@@ -10,6 +10,9 @@ export function useAuth() {
   const loading = computed(() => store.loading)
   const error = computed(() => store.error)
   const success = computed(() => store.success)
+  const is_admin = computed(() => store.user?.is_staff)
+  const is_authenticated = computed(() => !!store.user)
+  const role = computed(() => (store.user?.is_staff ? 'ADMIN' : 'USER'))
 
   const login = async (email: string, password: string) => {
     await store.login(email, password)
@@ -57,5 +60,8 @@ export function useAuth() {
     success,
     clearSuccess,
     updateImageProfile,
+    is_admin,
+    is_authenticated,
+    role,
   }
 }
