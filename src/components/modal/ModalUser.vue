@@ -30,14 +30,10 @@
         </div>
 
         <div class="flex gap-4 mt-4">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" v-model="form.is_active" class="h-4 w-4 text-blue-500 rounded" />
-            <span class="text-gray-700">Usuário Ativo</span>
-          </label>
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" v-model="form.is_staff" class="h-4 w-4 text-blue-500 rounded" />
-            <span class="text-gray-700">Acesso Staff</span>
-          </label>
+
+          <InputCheckbox label="Usuário Ativo" v-model="form.is_active" />
+          <InputCheckbox label="Acesso Staff" v-model="form.is_staff" />
+
         </div>
 
         <div v-if="!loading" class="flex justify-end gap-3 mt-6">
@@ -63,6 +59,7 @@ import { useUsers } from '@/composables/useUsers';
 import MiniAlert from '../alerts/MiniAlert.vue';
 import LogoLoading from '../loading/LogoLoading.vue';
 import type { User, UserPayload } from '@/types/user.types';
+import InputCheckbox from '../inputs/inputCheckbox.vue';
 
 const props = defineProps<{ isOpen: boolean, user?: User | null }>();
 const fileInput = ref<HTMLInputElement | null>(null)
