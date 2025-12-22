@@ -3,13 +3,8 @@ import { ref } from 'vue'
 import { authService } from '@/services/auth.service'
 import type { AxiosErrorResponse } from '@/types/axios.types'
 import { getMsgErrDRF } from '@/utils/helpers/getMsgErrDRF'
-
-export interface User {
-  id: number
-  name: string
-  email: string
-  is_staff?: boolean
-}
+import { userService } from '@/services/user.service'
+import type { User } from '@/types/user.types'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null)
@@ -93,6 +88,20 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  async function updateImageProfile(file: File) {
+    loading.value = true
+    try {
+      const response = await userService.updateProfileImage(file, user.value!.id)
+      success.value = 'Imagem alterada com sucesso!'
+      return response
+    } catch (err: unknown) {
+      const axiosError = err as AxiosErrorResponse
+      error.value = getMsgErrDRF(axiosError?.response?.data)
+    } finally {
+      loading.value = false
+    }
+  }
+
   return {
     user,
     loading,
@@ -105,5 +114,6 @@ export const useAuthStore = defineStore('auth', () => {
     checkAuth,
     changePassword,
     success,
+    updateImageProfile,
   }
 })

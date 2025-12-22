@@ -35,6 +35,10 @@ export function useAuth() {
     await store.changePassword(old_password, new_password, confirm_new_password)
   }
 
+  const updateImageProfile = async (file: File) => {
+    store.updateImageProfile(file)
+  }
+
   const clearError = () => {
     store.clearError()
   }
@@ -52,5 +56,6 @@ export function useAuth() {
     changePassword,
     success,
     clearSuccess,
+    updateImageProfile,
   }
 }

@@ -7,8 +7,11 @@
       </div>
 
       <div class="relative">
-        <UserCircleIcon class="h-8 w-8 cursor-pointer text-gray-600 hover:text-gray-900 transition-colors"
-          @click="toggleMenu" />
+        <UserCircleIcon v-if="!avatar"
+          class="h-8 w-8 cursor-pointer text-gray-600 hover:text-gray-900 transition-colors" @click="toggleMenu" />
+
+        <img v-else :src="avatar" alt="User"
+          class="h-8 w-8 rounded-full object-cover hover:opacity-80 transition cursor-pointer" @click="toggleMenu" />
 
         <ul v-if="isMenuOpen" class="absolute right-0 mt-2 w-48 rounded-xl bg-white py-2 shadow-lg z-50">
           <li>
@@ -34,7 +37,8 @@ import logoUrl from '@/assets/logos/logo_admaker.png'
 import { useAuth } from '@/composables/useAuth'
 import { useRouter } from 'vue-router'
 
-const { logout } = useAuth()
+const { logout, user } = useAuth()
+const avatar = user.value?.image
 const isMenuOpen = ref(false)
 const router = useRouter()
 
