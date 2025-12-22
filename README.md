@@ -36,3 +36,12 @@ App for create ads
 yarn install
 yarn dev
 ```
+
+# Obs
+
+after run seed in the back end you can make login 
+with
+
+  "Logins disponíveis:\n"
+                "→ Admin: admin@exemplo.com / admin123\n"
+                "→ Usuário normal: usuario@exemplo.com / user123"
